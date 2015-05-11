@@ -1,0 +1,33 @@
+application:
+    image: laravel/code
+    volumes:
+        - laravel:/var/www/laravel
+        - logs/laravel:/var/www/laravel/storage/logs
+    tty: true
+db:
+    image: mysql
+    ports:
+        - 3306:3306
+    environment:
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_DATABASE: laravel
+        MYSQL_USER: root
+        MYSQL_PASSWORD: root
+php:
+    image: laravel/php-fpm
+    expose:
+        - 9000:9000
+    volumes_from:
+        - application
+    links:
+        - db
+nginx:
+    image: laravel/nginx
+    ports:
+        - 80:80
+    links:
+        - php
+    volumes_from:
+        - application
+    volumes:
+        - logs/nginx/:/var/log/nginx
