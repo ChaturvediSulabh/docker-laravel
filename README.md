@@ -11,7 +11,7 @@ First, clone this repository:
 $ git clone https://github.com/tyloo/docker-laravel.git
 ```
 
-Next, put your Laravel application into `laravel` folder and do not forget to add `laravel.dev` in your `/etc/hosts` file.
+Next, put your Laravel application into `laravel` folder and do not forget to add `app.dev` in your `/etc/hosts` file.
 
 Now, you have to build your Docker images:
 
@@ -27,7 +27,7 @@ Then, run:
 $ docker-compose up
 ```
 
-You are done, you can visit your Laravel application in `http://laravel.dev`
+You are done, you can visit your Laravel application in `http://app.dev`
 
 # How it works?
 

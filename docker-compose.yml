@@ -1,8 +1,8 @@
 application:
-    image: laravel/code
+    build: containers/code
     volumes:
-        - laravel:/var/www/laravel
-        - logs/laravel:/var/www/laravel/storage/logs
+        - www:/var/www
+        - logs/laravel/:/var/www/storage/logs
     tty: true
 db:
     image: mysql
@@ -14,7 +14,7 @@ db:
         MYSQL_USER: root
         MYSQL_PASSWORD: root
 php:
-    image: laravel/php-fpm
+    build: containers/php-fpm
     expose:
         - 9000:9000
     volumes_from:
@@ -22,7 +22,7 @@ php:
     links:
         - db
 nginx:
-    image: laravel/nginx
+    build: containers/nginx
     ports:
         - 80:80
     links:
