@@ -1,0 +1,32 @@
+data:
+    image: tyloo/laravel-data
+    volumes:
+        - www:/data
+        - logs/laravel/:/data/storage/logs
+db:
+    image: mariadb
+    ports:
+        - 3306:3306
+    environment:
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_DATABASE: app.dev
+        MYSQL_USER: tyloo
+        MYSQL_PASSWORD: 123456
+php:
+    image: tyloo/laravel-phpfpm
+    expose:
+        - 9000:9000
+    volumes_from:
+        - data
+    links:
+        - db
+nginx:
+    image: tyloo/laravel-nginx
+    ports:
+        - 80:80
+    links:
+        - php
+    volumes_from:
+        - data
+    volumes:
+        - logs/nginx/:/var/log/nginx
